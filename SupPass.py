@@ -6,8 +6,8 @@ import sys
 
 
 def display_usage():
-    print("SUP'Pass -- The Safest Password Manager\n")
-    print("Usage : ./SUPpass.py -u <username> -d <domain_name> -p <master_password>\n")
+    print("SupPass -- The Safest Password Manager\n")
+    print("Usage : ./SupPass.py -u <username> -d <domain_name> -p <master_password>\n")
     print("Options :")
     print("     -h, --help      : show the help")
     print("     -u, --username  : input username for the site (pseudo, mail, etc...)")
@@ -35,7 +35,7 @@ def set_options(options):
         elif option in ('-d', '--domain'):
             domain = argument
         elif option in ("-p", "--password"):
-            password = argument
+            password =/home/kevin argument
 
     if "" in (username, domain, password):
         display_usage()
