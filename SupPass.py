@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 import base64
 import getopt
 import hashlib
@@ -35,7 +36,7 @@ def set_options(options):
         elif option in ('-d', '--domain'):
             domain = argument
         elif option in ("-p", "--password"):
-            password =/home/kevin argument
+            password = argument
 
     if "" in (username, domain, password):
         display_usage()

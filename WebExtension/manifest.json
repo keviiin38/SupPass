@@ -1,0 +1,25 @@
+{
+  "manifest_version": 2,
+  "name": "SupPass",
+  "version": "1.0",
+  "description": "SupPass -- The Safest Password Manager",
+  "homepage_url": "https://github.com/keviiin38/SupPass",
+  "icons": {
+    "48": "icons/SupPass-48.png",
+    "96": "icons/SupPass-96.png"
+  },
+  "permissions": [
+    "activeTab",
+    "clipboardWrite"
+  ],
+  "browser_action": {
+    "default_icon": "icons/SupPass-padlock-32.png",
+    "default_title": "SupPass",
+    "default_popup": "popup/SupPass.html"
+  },
+  "web_accessible_resources": [
+    "beasts/frog.jpg",
+    "beasts/turtle.jpg",
+    "beasts/snake.jpg"
+  ]
+}
