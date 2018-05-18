@@ -1,7 +1,7 @@
-![SupPass Official Logo](https://github.com/keviiin38/1EXL/blob/master/SupPass_official_logo.png)
+![SupPass Official Logo](https://github.com/keviiin38/SupPass/blob/master/Logos/SupPass_Official_Logo.png)
 
 
-<p align="center"><b>-- The Safest Password Manager --</b></p>
+<p align="center"><b>-- No Credentials Storage. No Problem. --</b></p>
 
 <br>
 
