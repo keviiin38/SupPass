@@ -5,11 +5,17 @@
   "description": "SupPass -- The Safest Password Manager",
   "homepage_url": "https://github.com/keviiin38/SupPass",
   "icons": {
+    "32": "icons/SupPass-32.png",
     "48": "icons/SupPass-48.png",
-    "96": "icons/SupPass-96.png"
+    "64": "icons/SupPass-64.png",
+    "128": "icons/SupPass-128.png",
+    "256": "icons/SupPass-256.png",
+    "512": "icons/SupPass-512.png",
+    "640": "icons/SupPass-640.png"
   },
   "permissions": [
     "activeTab",
+    "tabs",
     "clipboardWrite"
   ],
   "browser_action": {

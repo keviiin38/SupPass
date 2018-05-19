@@ -53,6 +53,33 @@ for (var i = 0; i < 3; i++) {
     });
 }
 
+// Fetch current domain
+function onTabs(tabs) {
+// tab.url requires the `tabs` permission
+  for (let tab of tabs) {
+	// -with sub-domain
+	//let httpDomainFilter = /^https?:\/\/([^\/]*)\//;
+	// -without sub-domain
+	let httpDomainFilter = /^https?:\/\/[^\.]*?\.?([^\/\.]+\.[\w]+)\//;
+	let match = httpDomainFilter.exec(tab.url);
+	if (match){
+		document.getElementById(id_names[1]).value = match[1];
+	}
+  }
+}
+function onError(error) {
+  console.log(`Error: ${error}`);
+}
+
+if (typeof browser !== 'undefined'){
+	var querying = browser.tabs.query({currentWindow: true, active: true});
+	querying.then(onTabs, onError);
+} else if (typeof chrome !== 'undefined'){
+	chrome.tabs.query({currentWindow: true, active: true}, onTabs);
+} else {
+	console.log("Unsupported navigator");
+}
+
 // Check for the 3 fields and display password if okay
 function button_listener() {
     const button = document.getElementById("submit");
