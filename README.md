@@ -45,15 +45,15 @@
 
 ## Requierements ##
 
-| Browser | Support | Versions |
-| ------- | :-----: | :------: |
-| Firefox | ✔ | _all_ |
-| Chrome | ✔ | _all_ |
-| Chromium | ✔ | _all_ |
-| Safari | **?** | _?_ |
-| Edge | **?** | _?_ |
-| I.E | **?** | _?_ |
-| Opera | **?** | _?_ |
+| Browser | Support | Versions | Download |
+| ------- | :-----: | :------: | :------: |
+| Firefox | ✔ | _all_ | [Firefox Add-on](https://addons.mozilla.org/en-US/firefox/addon/suppass/) |
+| Chrome | ✔ | _all_ | [Chrome Add-on](https://chrome.google.com/webstore/detail/suppass/fklgepdjmpjieiaimccffgplclogcbbf) |
+| Chromium | ✔ | _all_ | [Chrome Add-on](https://chrome.google.com/webstore/detail/suppass/fklgepdjmpjieiaimccffgplclogcbbf) |
+| Safari | **?** | _?_ | |
+| Edge | **?** | _?_ | |
+| I.E | **?** | _?_ | |
+| Opera | **?** | _?_ | |
 
 ## Usage ##
 
