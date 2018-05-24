@@ -1,0 +1,13 @@
+body {
+    background-color: #053869;
+}
+
+#logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#password_button {
+    font-size: 1.3rem;
+}

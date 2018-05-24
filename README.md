@@ -1,4 +1,5 @@
-![SupPass Official Logo](https://github.com/keviiin38/SupPass/blob/master/Logos/SupPass_Official_Logo.png)
+![SupPass Official 
+Logo](https://github.com/keviiin38/SupPass/blob/master/SupPass-WebExtension/img/logos/SupPass_Official_Logo.png)
 
 
 <p align="center"><b>-- No Credentials Storage. No Problem. --</b></p>

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="bootstrap-4.1.1/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="SupPass.css">
+
+    <link rel="icon" type="image/png" href="../img/icons/SupPass-padlock-32.png">
+    <title>SupPass</title>
+</head>
+<body>
+<img src="../img/logos/SupPass_logo_300x100.png" class="img-fluid p-2 mb-2" alt="SupPass Logo" id="logo">
+
+<form class="p-2">
+    <div class="form-group">
+        <input class="form-control" type="text" id="username" placeholder="Username..." required>
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="text" id="domain" placeholder="Domain..." required>
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="password" id="password" placeholder="Master Password..." required>
+    </div>
+    <input type="submit" class="btn btn-success btn-block mt-4" id="password_button" value="Get My Password !">
+</form>
+
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="jquery-3.1.1/jquery-3.3.1.min.js" type="text/javascript"></script>
+<script src="popper.js-1.14.3/popper.min.js" type="text/javascript"></script>
+<script src="bootstrap-4.1.1/js/bootstrap.min.js" type="text/javascript"></script>
+<!-- Custom JavaScript -->
+<script src="SupPass.js" type="text/javascript"></script>
+<script src="SHA-256/sha256.min.js" type="text/javascript"></script>
+
+</body>
+</html>
