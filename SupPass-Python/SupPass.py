@@ -1,3 +1,22 @@
+#
+#    SupPass -- No Credentials Storage. No Problem.
+#
+#    Copyright (C) 2018 Kevin  Delbegue, Nicolas Chateau, Yann Loukili, Mathieu Calemard Du Gardin
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+
 #!/usr/bin/python3
 
 import base64
@@ -56,7 +75,7 @@ def build_password(input_data):
     return password[:15]  # Return only the 15 first characters of the Base64 result
 
 
-def SUPpass():
+def SupPass():
     options = get_options()
 
     if options == -1 or options == []:
@@ -69,4 +88,4 @@ def SUPpass():
     print("\nYour password :", final_password, "\n")
 
 
-SUPpass()
+SupPass()
