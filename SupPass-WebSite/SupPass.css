@@ -128,3 +128,9 @@ a {
     border-radius: 50px !important;
     margin-bottom: 30px !important;
 }
+
+/* Others */
+.upload_img {
+    width: 50%;
+    height: auto;
+}
