@@ -83,16 +83,24 @@ function build_password() {
     let password = $("#password").val();
 
     // Concatenate the 3 variables, get the SHA-256 of the result
-    let hash = sha256(username + domain + password);
+    input_data_hashed = sha256(username + domain + password);
 
     // Reset the password and reuse the password variable
-    password = "";
+    sha256_trunc_password = '';
 
     // Get 1 character every 4 characters
-    for (let i = 0; i < 60; i += 4) {
-        password += hash.charAt(i);
+    for (i = 0; i < 64; i += 4){
+        sha256_trunc_password += input_data_hashed.charAt(i);
+    }
+
+    base64_password = btoa(sha256_trunc_password);
+
+    final_password = '';
+    for (i = 0; i < sha256_trunc_password.length; i += 1){
+        if (i % 2 == 0) final_password += base64_password.charAt(i);
+        else final_password += sha256_trunc_password.charAt(i);
     }
 
     // Return the password with the 15 first characters of the password formatted in base64
-    return btoa(password).substring(0, 15);
+    return final_password;
 }
