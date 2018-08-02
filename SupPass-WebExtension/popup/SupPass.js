@@ -2,7 +2,7 @@
 #
 #    SupPass -- No Credentials Storage. No Problem.
 #
-#    Copyright (C) 2018 Kevin  Delbegue, Nicolas Chateau, Yann Loukili, Mathieu Calemard Du Gardin
+#    Copyright (C) 2018 Kevin Delbegue, Johnny201, Yann Loukili, Mathieu Calemard Du Gardin
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ if (typeof browser !== 'undefined') {
 } else if (typeof chrome !== 'undefined') {
     chrome.tabs.query({currentWindow: true, active: true}, onTabs);
 } else {
-    console.log("Unsupported navigator");
+    console.log("Unsupported browser");
 }
 
 
@@ -47,20 +47,20 @@ function onError(error) {
 }
 
 
-// On submit display the password, on second click copy to clipboard
+// On submit copy the passwword to the clipboard, on second click display the password
 $("form").submit(function (event) {
     let form = this;
     let password_button = $("#password_button");
 
     event.preventDefault();
 
-    if (password_button.val() !== "Get My Password !") {
-        copy_clipboard(password_button.val());
+    if (password_button.val() == "Get My Password !") {  // On the first click will copy the password to the cliboard
+        copy_clipboard(build_password());
         password_button.val("Copied !");
         setTimeout(function () {
             form.submit();
         }, 2000)
-    } else {
+    } else if (password_button.val() == "Copied !") {  // On the second click will show the password
         password_button.val(build_password());
     }
 });
