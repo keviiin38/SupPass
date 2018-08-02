@@ -82,15 +82,15 @@ def set_options(options):
 
 
 def build_password(input_data):
-    password = ""
+    password = ''
     input_data_hashed = hashlib.sha256(input_data.encode()).hexdigest()  # Hash the input_data with SHA-256
 
-    for i in range(0, 60, 4):
-        password += input_data_hashed[i]  # Select 1 char every 4 chars on a 60 chars string (total of 15 chars)
+    for i in range(0, 64, 4):
+        password += input_data_hashed[i]  # Select 1 char every 4 chars on a 64 chars string (total of 16 chars)
 
     password = base64.b64encode(password.encode()).decode()  # Convert to Base64, add Upper and Lower case
 
-    return password[:15]  # Return only the 15 first characters of the Base64 result
+    return password[:16]  # Return only the 16 first characters of the Base64 result
 
 
 def copy_clipboard(text):
