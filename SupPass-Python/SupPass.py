@@ -1,7 +1,7 @@
 #
 #    SupPass -- No Credentials Storage. No Problem.
 #
-#    Copyright (C) 2018 Kevin  Delbegue, Nicolas Chateau, Yann Loukili, Mathieu Calemard Du Gardin
+#    Copyright (C) 2018 Kevin Delbegue, Johnny201, Yann Loukili, Mathieu Calemard Du Gardin
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -23,16 +23,17 @@ import base64
 import getopt
 import hashlib
 import sys
+import platform, os  # for the clipboard function
 
 
 def display_usage():
-    print("SupPass -- The Safest Password Manager\n")
-    print("Usage : ./SupPass.py -u <username> -d <domain_name> -p <master_password>\n")
-    print("Options :")
-    print("     -h, --help      : show the help")
-    print("     -u, --username  : input username for the site (pseudo, mail, etc...)")
-    print("     -d, --domain    : domain name of the site")
-    print("     -p, --password  : master password of the user\n")
+    print("SupPass -- The Safest Password Manager\n\n"
+          "Usage : ./SupPass.py -u <username> -d <domain_name> -p <master_password>\n\n"
+          "Options :\n"
+          "     -h, --help      : show the help\n"
+          "     -u, --username  : input username for the site (pseudo, mail, etc...)\n"
+          "     -d, --domain    : domain name of the site\n"
+          "     -p, --password  : master password of the user\n\n")
     sys.exit(1)
 
 
@@ -75,6 +76,71 @@ def build_password(input_data):
     return password[:15]  # Return only the 15 first characters of the Base64 result
 
 
+def copy_clipboard(text):
+    text = str(text)
+
+    def winClip(text):
+        command = 'echo | set /p nul=' + text.strip() + '| clip'
+        os.system(command)
+
+
+    def macClip(text):
+        outf = os.popen('pbcopy', 'w')
+        outf.write(text)
+        outf.close()
+
+
+    def gtkClip(text):
+        global cb
+        cb = gtk.Clipboard()
+        cb.set_text(text)
+        cb.store()
+
+
+    def qtClip(text):
+        cb.setText(text)
+
+
+    def xclipClip(text):
+        outf = os.popen('xclip -selection c', 'w')
+        outf.write(text)
+        outf.close()
+
+
+    def xselClip(text):
+        outf = os.popen('xsel -i', 'w')
+        outf.write(text)
+        outf.close()
+
+
+    if os.name == "nt" or platform.system() == "Windows":
+        import ctypes
+        winClip(text)
+    elif os.name == "mac" or platform.system() == "Darwin":
+        macClip(text)
+    elif os.name == "posix" or platform.system() == "Linux":
+        xclipExists = os.system("which xclip") == 0
+        if xclipExists:
+            xclipClip(text)
+        else:
+            xselExists = os.system("which xsel") == 0
+            if xselExists:
+                xselClip(text)
+            try:
+                import gtk
+                gtkClip(text)
+            except Exception:
+                try:
+                    import PyQt4.QtCore
+                    import PyQt4.QtGui
+                    app = PyQt4.QApplication([])
+                    cb = PyQt4.QtGui.QApplication.clipboard()
+                    qtClip(text)
+                except:
+                    raise Exception("SupPass python requires the gtk or PyQt4 module installed,\n"
+                                    "or the xclip command to copy to clipboard")
+
+
 def SupPass():
     options = get_options()
 
@@ -85,7 +151,13 @@ def SupPass():
 
     final_password = build_password(username + domain + password)
 
-    print("\nYour password :", final_password, "\n")
+    print("\nYour password :", final_password, "\n"
+          "do you want to copy it to your clipboard (y/n)")
+
+    clip = str(input())
+
+    if clip == "y" or "Y":  # this will copy the password to the clip board
+        copy_clipboard(final_password)
 
 
 SupPass()
