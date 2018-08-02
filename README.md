@@ -8,14 +8,21 @@ Logo](https://github.com/keviiin38/SupPass/blob/master/SupPass-WebExtension/img/
 
 # Intro
 
-  `Nothing for the moment...`
+SupPass is a light weight app that allow you to generate password based on 3 inputs: username, domain name, and a master password.
+The algorithm generate a password for the site you are visiting for you to use it has login/registration.
+<br><br>
+The main advantage to use SupPass is that password are not stored anywhere online nor offline, so you only need to remember your master password and username.
+<br><br>
+This app generate hard to brute-force/guess passwords, but we are NOT responsible if your master password or generated passwords are stolen.
   
 <br>
 
 # Python Version #
 
 ## Requirements ##
+
 - [Python 3.x](https://www.python.org/downloads/)
+
 
 ## Usage ##
 - List all options :
@@ -58,7 +65,7 @@ Logo](https://github.com/keviiin38/SupPass/blob/master/SupPass-WebExtension/img/
 
 ## Usage ##
 
-  `Nothing for the moment...`
+Download the web extension from the link above.
 
 <br>
 
