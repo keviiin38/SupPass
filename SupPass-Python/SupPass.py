@@ -19,34 +19,45 @@
 
 #!/usr/bin/python3
 
-import base64
-import getopt
-import hashlib
 import sys
+import getopt
+import base64
+import hashlib
 import platform, os  # for the clipboard function
+import time
 
 
 def display_usage():
     print("SupPass -- The Safest Password Manager\n\n"
           "Usage : ./SupPass.py -u <username> -d <domain_name> -p <master_password>\n\n"
-          "Options :\n"
+          "Options:\n"
           "     -h, --help      : show the help\n"
           "     -u, --username  : input username for the site (pseudo, mail, etc...)\n"
           "     -d, --domain    : domain name of the site\n"
-          "     -p, --password  : master password of the user\n\n")
+          "     -p, --password  : master password of the user\n"
+          "Optional:\n"
+          "     -s, --see       : enable the print of the password\n"
+          "     -c, --clipoff   : disable the copy in clipboard\n"
+          "     -t, --timer     : timer before flushing the clipboard (0 to disable the flush)\n")
     sys.exit(1)
 
 
 def get_options():
     try:
-        options, arguments = getopt.getopt(sys.argv[1:], 'hu:d:p:', ['help', 'username=', 'domain=', 'password='])
+        options, arguments = getopt.getopt\
+        (
+            sys.argv[1:],
+            'hu:d:p:sct:',
+            ['help', 'username=', 'domain=', 'password=', 'see', 'clip', 'timer=']
+        )
         return options
     except getopt.GetoptError:
         return -1
 
 
 def set_options(options):
-    username, domain, password = "", "", ""
+    username, domain, password = "", "", ""  # needed arguments
+    see, clip, timer = False, True, 60       # optional arguments
 
     for option, argument in options:
         if option in ('-h', '--help'):
@@ -57,11 +68,17 @@ def set_options(options):
             domain = argument
         elif option in ("-p", "--password"):
             password = argument
+        elif option in ("-s", "--see"):
+            see = True
+        elif option in ("-c", "--clipboard"):
+            clip = False
+        elif option in ("-t", "--timer"):
+            timer = int(argument)
 
-    if "" in (username, domain, password):
+    if '' in (username, domain, password):
         display_usage()
     else:
-        return username, domain, password
+        return username, domain, password, see, clip, timer
 
 
 def build_password(input_data):
@@ -147,17 +164,18 @@ def SupPass():
     if options == -1 or options == []:
         display_usage()
 
-    username, domain, password = set_options(options)
+    username, domain, password, see, clip, timer = set_options(options)
 
     final_password = build_password(username + domain + password)
 
-    print("\nYour password :", final_password, "\n"
-          "do you want to copy it to your clipboard (y/n)")
+    if see:
+        print("\nYour password:", final_password, "\n")
 
-    clip = str(input())
-
-    if clip == "y" or "Y":  # this will copy the password to the clip board
+    if clip:
         copy_clipboard(final_password)
+        if timer>0:
+            time.sleep(timer)
+            copy_clipboard('')
 
 
 SupPass()
