@@ -45,6 +45,10 @@ This app generate hard to brute-force/guess passwords, but we are NOT responsibl
   -u, --username      Input username for the site (pseudo, mail, etc...)
   -d, --domain        Domain name of the site (example.org, google.com, etc...)
   -p, --password      Master password of the user
+  
+  -s, --see           Enable the print of the password
+  -c, --clipoff       Disable the copy in clipboard
+  -t, --timer         Timer before flushing the clipboard
 ```
 
 <br>
@@ -72,7 +76,7 @@ Download the web extension from the link above.
 # Credits
 
 - [@keviiin38](https://github.com/keviiin38)
-- [@Johnny201](https://github.com/Johnny201)
+- [@Johnny201](https://github.com/2O4)
 - [@yloukili](https://github.com/yloukili)
 - [@Dramelac](https://github.com/Dramelac)
 
