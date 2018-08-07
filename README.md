@@ -76,7 +76,7 @@ Download the web extension from the link above.
 # Credits
 
 - [@keviiin38](https://github.com/keviiin38)
-- [@Johnny201](https://github.com/2O4)
+- [@2O4](https://github.com/2O4)
 - [@yloukili](https://github.com/yloukili)
 - [@Dramelac](https://github.com/Dramelac)
 
