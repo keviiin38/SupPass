@@ -1,7 +1,7 @@
 #
 #    SupPass -- No Credentials Storage. No Problem.
 #
-#    Copyright (C) 2018 Kevin Delbegue, Johnny201, Yann Loukili, Mathieu Calemard Du Gardin
+#    Copyright (C) 2018 Kevin Delbegue, 2O4, Yann Loukili, Mathieu Calemard Du Gardin
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -20,65 +20,11 @@
 #!/usr/bin/python3
 
 import sys
-import getopt
+import argparse
 import base64
 import hashlib
 import platform, os  # for the clipboard function
 import time
-
-
-def display_usage():
-    print("SupPass -- The Safest Password Manager\n\n"
-          "Usage : ./SupPass.py -u <username> -d <domain_name> -p <master_password>\n\n"
-          "Options:\n"
-          "     -h, --help      : show the help\n"
-          "     -u, --username  : input username for the site (pseudo, mail, etc...)\n"
-          "     -d, --domain    : domain name of the site\n"
-          "     -p, --password  : master password of the user\n"
-          "Optional:\n"
-          "     -s, --see       : enable the print of the password\n"
-          "     -c, --clipoff   : disable the copy in clipboard\n"
-          "     -t, --timer     : timer before flushing the clipboard (0 to disable the flush)\n")
-    sys.exit(1)
-
-
-def get_options():
-    try:
-        options, arguments = getopt.getopt\
-        (
-            sys.argv[1:],
-            'hu:d:p:sct:',
-            ['help', 'username=', 'domain=', 'password=', 'see', 'clip', 'timer=']
-        )
-        return options
-    except getopt.GetoptError:
-        return -1
-
-
-def set_options(options):
-    username, domain, password = "", "", ""  # needed arguments
-    see, clip, timer = False, True, 60       # optional arguments
-
-    for option, argument in options:
-        if option in ('-h', '--help'):
-            display_usage()
-        elif option in ('-u', '--username'):
-            username = argument
-        elif option in ('-d', '--domain'):
-            domain = argument
-        elif option in ("-p", "--password"):
-            password = argument
-        elif option in ("-s", "--see"):
-            see = True
-        elif option in ("-c", "--clipboard"):
-            clip = False
-        elif option in ("-t", "--timer"):
-            timer = int(argument)
-
-    if '' in (username, domain, password):
-        display_usage()
-    else:
-        return username, domain, password, see, clip, timer
 
 
 def build_password(input_data):
@@ -158,24 +104,34 @@ def copy_clipboard(text):
                                     "or the xclip command to copy to clipboard")
 
 
-def SupPass():
-    options = get_options()
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
 
-    if options == -1 or options == []:
-        display_usage()
+    parser.add_argument('-u', '--username', help="Input username for the site", action="store", type=str, nargs="?")
+    parser.add_argument('-d', '--domain',   help="Domain name", action="store", type=str, nargs="?")
+    parser.add_argument('-p', '--password', help="Master password", action="store", type=str, nargs="?")
+    parser.add_argument('-s', '--see',      help="Enable the print of the password", action="store_true")
+    parser.add_argument('-c', '--clipoff',  help="Disable the copy in clipboard", action="store_true")
+    parser.add_argument('-t', '--timer',    help="Timer before flushing the clipboard", action="store", type=int, nargs="?", default=60)
 
-    username, domain, password, see, clip, timer = set_options(options)
+    args = parser.parse_args()
+    username = args.username
+    domain = args.domain
+    password = args.password
+    SEE = args.see
+    CLIPOFF = args.clipoff
+    timer = args.timer
+
+    if username==None or password==None or domain==None:
+        print("./SupPass.py -u <username> -d <domain_name> -p <master_password>")
 
     final_password = build_password(username + domain + password)
 
-    if see:
+    if SEE:
         print("\nYour password:", final_password, "\n")
 
-    if clip:
+    if not(CLIPOFF):
         copy_clipboard(final_password)
         if timer>0:
             time.sleep(timer)
             copy_clipboard('')
-
-
-SupPass()
