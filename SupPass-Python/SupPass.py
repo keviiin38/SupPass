@@ -111,7 +111,6 @@ def copy_clipboard(text):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-
     parser.add_argument('-u', '--username', help="Input username for the site", action="store", type=str, nargs="?")
     parser.add_argument('-d', '--domain',   help="Domain name", action="store", type=str, nargs="?")
     parser.add_argument('-p', '--password', help="Master password", action="store", type=str, nargs="?")
@@ -140,4 +139,3 @@ if __name__ == "__main__":
         if timer>0:
             time.sleep(timer)
             copy_clipboard('')
-
