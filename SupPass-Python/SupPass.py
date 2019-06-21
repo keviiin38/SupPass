@@ -28,15 +28,20 @@ import time
 
 
 def build_password(input_data):
-    password = ''
+    sha256_trunc_password = ''
     input_data_hashed = hashlib.sha256(input_data.encode()).hexdigest()  # Hash the input_data with SHA-256
 
     for i in range(0, 64, 4):
-        password += input_data_hashed[i]  # Select 1 char every 4 chars on a 64 chars string (total of 16 chars)
+        sha256_trunc_password += input_data_hashed[i]  # Select 1 out of 4 chars on a 64 chars string (result: 16 chars)
 
-    password = base64.b64encode(password.encode()).decode()  # Convert to Base64, add Upper and Lower case
+    base64_password = base64.b64encode(sha256_trunc_password.encode()).decode()  # Convert to Base64, add Upper and Lower case
 
-    return password[:16]  # Return only the 16 first characters of the Base64 result
+    final_password = ''
+    for x in range(len(sha256_trunc_password)):  # take alternatively a char from the base54 or the sha256
+        if x%2==0: final_password += base64_password[x]
+        else: final_password += sha256_trunc_password[x]
+
+    return final_password  # Return only the 16 characters password
 
 
 def copy_clipboard(text):
@@ -106,7 +111,6 @@ def copy_clipboard(text):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-
     parser.add_argument('-u', '--username', help="Input username for the site", action="store", type=str, nargs="?")
     parser.add_argument('-d', '--domain',   help="Domain name", action="store", type=str, nargs="?")
     parser.add_argument('-p', '--password', help="Master password", action="store", type=str, nargs="?")
